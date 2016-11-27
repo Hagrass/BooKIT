@@ -1,2 +1,3 @@
 # BooKIT
-Class room reservation software at Zewail City  for science and Technology / Software Engineering course Project
+Class room reservation software
+This is Software Engineering course Project at Zewail City for Science and Technology
