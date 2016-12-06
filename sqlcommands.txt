@@ -1,0 +1,93 @@
+CREATE DATABASE BookIT;
+use BookIT;
+
+Create Table Users(
+    UserID int not null AUTO_INCREMENT,
+    primary key(UserID),
+    Password varchar(30) not null,
+    UniversityPosition enum('Student','TA','Professor','MajorRepresentative') not null,
+    Email varchar(100) not null,
+    UniversityID int not null,
+    PhoneNumber varchar(20)
+    );
+    
+    
+Create TABLE Classrooms(
+    ClassroomID int not null AUTO_INCREMENT,
+    primary key(CLassroomID),
+    NumberofChairs int not null,
+    Microphone Boolean not null,
+    Projector Boolean not null,
+    Computer Boolean not null,
+    SmartBoard Boolean not null
+    );
+CREATE Table Reservations(
+    ReservationID int not null AUTO_INCREMENT,
+    primary key(ReservationID),
+    ClassRoomID int,
+    FOREIGN key(ClassRoomID) REFERENCES Classrooms(ClassroomID),
+    UserID int not null,
+    foreign key(UserID) REFERENCES Users(UserID),
+    TimeSlot time not null,
+    ResDate date not null,
+    Priority int not null,
+    RecurringResID int(11),
+    Status enum('reserved','waiting','recurringWaiting') not null
+);
+Alter TABLE Reservations
+Add NumberofStudents int,
+Add Purpose enum('Lecture','Tutorial','Exam','Seminar','StudentActivity','Meeting') not null,
+ADD Microphone boolean not null,
+ADD Computer boolean not null,
+ADD SmartBoard boolean not null,
+ADD Projector boolean not null;
+
+Create table EmailLists(
+    ReservationID int not null,
+    FOREIGN KEY(ReservationID) REFERENCES Reservations(ReservationID),
+    Email varchar(100) not null
+    );
+
+Create TABLE EmergencyRequests(
+    RequestID int not null AUTO_INCREMENT,
+    primary key(RequestID),
+    PerpetratorID int not null,
+    VictimID int not null,
+    FOREIGN key(PerpetratorID) REFERENCES Reservations(ReservationID),
+    FOREIGN key(VictimID) REFERENCES Reservations(ReservationID)
+    );
+#-----------------------------------------insertion    
+Insert into Users(UniversityID,UniversityPosition,Password,Email,PhoneNumber)
+VALUES (20134903,'Student',12345,'s-mahmoud.abdelhameed@zewailcity.edu.eg','01285301109')
+
+Insert into Classrooms(ClassroomID,NumberofChairs,Projector,SmartBoard,Microphone,Computer)
+VALUES(155,30,1,0,1,0);
+Insert into Classrooms(ClassroomID,NumberofChairs,Projector,SmartBoard,Microphone,Computer)
+VALUES(145,30,1,0,1,1);
+Insert into Classrooms(ClassroomID,NumberofChairs,Projector,SmartBoard,Microphone,Computer)
+VALUES(135,5,1,1,1,1);
+Insert into Classrooms(ClassroomID,NumberofChairs,Projector,SmartBoard,Microphone,Computer)
+VALUES(157,50,1,0,0,1);
+Insert into Classrooms(ClassroomID,NumberofChairs,Projector,SmartBoard,Microphone,Computer)
+VALUES(205,10,1,0,1,1);
+
+
+Insert INTO Reservations(ClassRoomID,UserID,ResDate,TimeSlot,Status,Purpose,RecurringResID,NumberofStudents,Priority,SmartBoard,Computer,Microphone,Projector)
+VALUES(135,1,'2016-5-24','08:20:00','reserved','Lecture',null,null,1000,0,0,0,0);
+
+#imp queries................................................
+
+#view rooms
+Select Classrooms.ClassroomID FROM Classrooms WHERE Classrooms.ClassroomID not IN (SELECT Classrooms.ClassroomID FROM Classrooms,Reservations WHERE Classrooms.ClassroomID=Reservations.ClassRoomID);
+
+#change password
+UPDATE Users Set Password='1661966' where Password='12345' And Email='s-mahmoud.abdelhameed@zewailcity.edu.eg';
+
+#search available rooms
+
+Select Classrooms.ClassroomID FROM Classrooms WHERE Classrooms.ClassroomID not IN (SELECT Classrooms.ClassroomID FROM Classrooms,Reservations WHERE Classrooms.ClassroomID=Reservations.ClassRoomID AND ResDate='2016-5-24' AND TimeSlot='08:20:00') And NumberofChairs>=5 And Microphone=1 And Projector=1 And SmartBoard=0 And Computer=1;
+
+
+#choose waiting query
+SELECT * From Reservations where ResDate='2016-6-24' And TimeSlot='11:50:00' And Status='waiting' AND Reservations.NumberofStudents<=(SELECT NumberofChairs FROM Classrooms where ClassRoomID=135) AND Reservations.Computer<=(SELECT Computer FROM Classrooms where ClassRoomID=135) and Reservations.Microphone<=(SELECT Microphone FROM Classrooms where ClassRoomID=135) and Reservations.SmartBoard<=(SELECT SmartBoard FROM Classrooms where ClassRoomID=135) and Reservations.Projector<=(SELECT Projector FROM Classrooms where ClassRoomID=135)
+
