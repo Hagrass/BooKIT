@@ -10,28 +10,34 @@ package db_mysql_lab7;
  * @author root
  */
 import java.sql.*;
+import java.time.*;
 import java.util.*;
+//import java.net.*;
 public class DBConnect {
     
- private Connection con;
-    private Statement st;
-    private ResultSet rs;
+    private Connection con;
     
-    public DBConnect() {
+    
+    public DBConnect() {       //sql7.freemysqlhosting.net                  
  try {
      Class.forName("com.mysql.jdbc.Driver");
-    // con = DriverManager.getConnection("jdbc:mysql://10.2.101.59:13306/BookIT", "root", "921949");
-      con = DriverManager.getConnection("jdbc:mysql://sql7.freemysqlhosting.net:3306/sql7148349", "sql7148349", "CznnP1w1TK");
+    con = DriverManager.getConnection("jdbc:mysql://10.2.101.59:13306/sql7148349", "root", "921949");
+//con = DriverManager.getConnection("jdbc:mysql://sql7.freemysqlhosting.net:3306/sql7148349", "sql7148349", "CznnP1w1TK");
     
-    st = con.createStatement();
- } catch (Exception ex) {
+ } 
+ catch (Exception ex) {
      System.out.println("Error: " + ex);
      
  }
     }    
     public Boolean checkuserwithIDorEmail(int UserID,String Email) //checks if userID or user email exists before
-    {                       //used in register function
+    {     
+        
+
         try{
+            Statement st;
+            ResultSet rs;//used in register function
+            st = con.createStatement();
             //int UserID=1;
             //String Email="aaa@gmail.com";
             String query="Select UserID From Users Where Email='"+Email+"' or UserID="+UserID;
@@ -47,6 +53,9 @@ public class DBConnect {
     public Boolean checkuserwithIDandEmail(int UserID,String Email) //checks if userID or user email exists before
     {                       //used in register function
         try{
+            Statement st;
+            ResultSet rs;//used in register function
+            st = con.createStatement();
             //int UserID=1;
             //String Email="aaa@gmail.com";
             String query="Select UserID From Users Where Email='"+Email+"' and UserID="+UserID;
@@ -62,11 +71,14 @@ public class DBConnect {
         public Boolean checkuserwithIDandpassword(int UserID,String Password) //checks if userID or user email exists before
     {                       //used in register function
         try{
+            Statement st;
+            ResultSet rs;//used in register function
+            st = con.createStatement();
             //int UserID=1;
             //String Email="aaa@gmail.com";
             String query="Select UserID From Users Where Password='"+Password+"' and UserID="+UserID;
             rs=st.executeQuery(query);
-            if(rs.next()!=false) return false;//System.out.println("This ID or Email already registered");
+            if(rs.next()==false) return false;//System.out.println("This ID or Email already registered");
             return true;
         }
         catch(Exception ex){
@@ -76,6 +88,9 @@ public class DBConnect {
         }
     public Boolean insertuser(int UserID,String UniversityPosition,String Password,String Email,String Phone) { // this will take a user object and takes its variables which will come from gui
  try {
+            Statement st;
+            ResultSet rs;//used in register function
+            st = con.createStatement();
     
      String query = "Insert into Users(UserID,UniversityPosition,Password,Email,PhoneNumber)\n" 
           + "VALUES ("+UserID+",'"+UniversityPosition+"','"+Password+"','"+Email+"','"+Phone+"')";
@@ -92,6 +107,9 @@ public class DBConnect {
     
     public Boolean updatepassword(int UserID,String newpassword){  //takes old password,email and new password //note he user would be logged in already so we have his UserID  or email from the user object
         try{
+            Statement st;
+            ResultSet rs;//used in register function
+            st = con.createStatement();
             //String oldpassword="321243";
             //String newpassword="56789";
             
@@ -122,15 +140,18 @@ public class DBConnect {
     
 
     
-    public Boolean getuser(User newuser,int UserID){ //this takes userID and password from GUI and should end by creating a user object
+    public User getuser(int UserID){ //this takes userID and password from GUI and should end by creating a user object
         
         try{
-            
+            Statement st;
+            ResultSet rs;//used in register function
+            st = con.createStatement();
             //String UniversityID="201304766";
             //String Password="921949";
             String query="Select * FROM Users Where UserID='"+UserID+"'"; 
             rs=st.executeQuery(query);
           int flg=0; // to indicate if it is empty or not
+          User newuser=new User(this);
           while(rs.next()){
               if(flg==0) flg=1;
               newuser.setUniversityPosition(rs.getString("UniversityPosition"));   
@@ -138,47 +159,51 @@ public class DBConnect {
               newuser.setEmail(rs.getString("Email"));
               newuser.setPassword("Password");
               newuser.setPhone_number("PhoneNumber");
-
               //System.out.println(UniversityPosition);
           }
-          if(flg==0) return false;
-          return true;
+          if(flg==0) return null;
+          return newuser;
+        
         }
         catch(Exception ex){
                    System.out.println(ex);
-                   return false;
+                   return null;
         }
     }
-     public Boolean Login(int UserID,String Password,User newuser){
+     public User Login(int UserID,String Password){
         Boolean flg=this.checkuserwithIDandpassword(UserID, Password);
         if(flg==false){
-            return false;
+            return null;
         }
         else{
-            flg=this.getuser(newuser, UserID);
-            return flg;
+            User newuser=this.getuser(UserID);
+            return newuser;
         }
         
         
     }
         public Boolean Register(int UserID,String UniversityPosition,String Password,String Email,String Phone){
                Boolean flg=this.checkuserwithIDorEmail(UserID,Email);
-               if(flg==false) return false;
+               if(flg==true) return false;
                flg=this.insertuser(UserID,UniversityPosition,Password,Email,Phone); //flg is true when registeration is done
                    
                
                return flg;
 
     }
-    public ArrayList SearchAvaliableClasses(String Date,String TimeSlot,int numberofStudents,int mic,int comp,int proj,int smart){ //note this can be used also for viewrooms() by creating an open req object 
+    public ArrayList<Integer> SearchAvaliableClasses(String Date,String TimeSlot,int numberofStudents,int mic,int comp,int proj,int smart){ //note this can be used also for viewrooms() by creating an open req object 
         
            // this should take apointer to an array and fill the array(array of classes of only class IDs) inside the while loop     
         try{
+           
+            Statement st;
+            ResultSet rs;//used in register function
+            st = con.createStatement();
            String query= "Select Classrooms.ClassroomID FROM Classrooms WHERE Classrooms.ClassroomID not IN (SELECT Classrooms.ClassroomID FROM Classrooms,Reservations WHERE Classrooms.ClassroomID=Reservations.ClassRoomID AND ResDate='"+Date+"'AND TimeSlot='"+TimeSlot+"') And NumberofChairs>= "+numberofStudents+ " And Microphone>="+mic+ " And Projector>="+proj+ " And SmartBoard>="+smart+ " And Computer>="+comp;
            
            rs=st.executeQuery(query);
            
-           ArrayList classIDs=new ArrayList();
+           ArrayList<Integer> classIDs=new ArrayList();
               while(rs.next()){
              
               Integer classID=rs.getInt("ClassroomID");
@@ -191,7 +216,7 @@ public class DBConnect {
             
         }
         catch(Exception ex){
-                  System.out.println(ex);
+                  System.out.println("Error"+ex);
                   return null;
         }
         
@@ -202,6 +227,9 @@ public class DBConnect {
   //in updateschedule ->priority=1000 , requirments =zeros , we may let user enter the purpose also
 //in recurring booking ->algorithm
         try{
+            Statement st;
+            ResultSet rs;//used in register function
+            st = con.createStatement();
        //int  UserID=5;
        Integer ClassRoomID=res.getClassroom().getClassroomID();
        int comp=res.getComp();
@@ -211,13 +239,13 @@ public class DBConnect {
        int numofStudents=res.getNumberofStudents();
        int priority=res.getPriority();
        String Status= res.getStatus();
-       String Date=res.getDate();
+       String Date=res.getDate().toString();
        String TimeSlot=res.getTimeslot();
        String Purpose=res.getPurpose();
        int UserID=res.getUserID();
        
        String query="Insert INTO Reservations(ClassRoomID,UserID,ResDate,TimeSlot,Status,Purpose,NumberofStudents,Priority,SmartBoard,Computer,Microphone,Projector)"+
-"VALUES("+ClassRoomID+","+UserID+",'"+Date+"','"+TimeSlot+"','"+Status+"','"+Purpose+"',"+","+numofStudents+","+priority+","+smart+","+comp+","+mic+","+proj+")";
+"VALUES("+ClassRoomID+","+UserID+",'"+Date+"','"+TimeSlot+"','"+Status+"','"+Purpose+"',"+numofStudents+","+priority+","+smart+","+comp+","+mic+","+proj+")";
        st.executeUpdate(query);
        return true;
         }
@@ -230,6 +258,9 @@ public class DBConnect {
     public void getMaxrecurringID(){ //useg to get the next recurring ID
         
         try{
+            Statement st;
+            ResultSet rs;//used in register function
+            st = con.createStatement();
             String query="Select Max(RecurringResID) AS 'ResID' FROM Reservations";
             rs=st.executeQuery(query);
             rs.next();
@@ -241,17 +272,19 @@ public class DBConnect {
         }
         
     }
-    public ArrayList viewmyreservation(int UserID,String startDate,String endDate){ // will take a userID,interval of DAtes and can be used also to view schedule by controlling the st-end date and put priority=1000
+    public ArrayList<Reservation> viewmyreservation(int UserID,String startDate,String endDate){ // will take a userID,interval of DAtes and can be used also to view schedule by controlling the st-end date and put priority=1000
            //this will return an array of reservations or at least reservation IDs to be used for cancelation
         try{
-            
+            Statement st;
+            ResultSet rs;//used in register function
+            st = con.createStatement();
             //String startDate="2016-05-25";
                     
             //String endDate="2016-06-24";        
             String query="Select * from Reservations Where ResDate<="+"'"+endDate+"'"+"AND ResDate>='"+startDate+"'"+"AND UserID="+UserID;       
            rs=st.executeQuery(query);
            int flg=0;
-           ArrayList Reservations=new ArrayList();
+           ArrayList<Reservation> Reservations=new ArrayList();
             while (rs.next()){ // this should return the values of resID,classroomID,Date,time because they will be used later to handle the waiting list
                 if(flg==0) flg=1;
                 Reservation res=new Reservation();
@@ -259,7 +292,7 @@ public class DBConnect {
                 res.setClassroom(getClassRoom(rs.getInt("ClassRoomID")));
                 res.setUserID(rs.getInt("UserID"));
                 res.setTimeslot(rs.getString("TimeSlot"));
-                res.setDate(rs.getString("ResDate"));
+                res.setDate(rs.getObject("resDate",LocalDate.class));
                 res.setPriority(rs.getInt("Priority"));
                 res.setStatus(rs.getString("Status"));
                 res.setNumberofStudents(rs.getInt("NumberofStudents"));
@@ -282,6 +315,9 @@ public class DBConnect {
     }
     public Boolean DeleteReservation(int resID){ //this cancel a reservation by the reservation ID used for the normal cancel reservation function 
         try{
+            Statement st;
+            ResultSet rs;//used in register function
+            st = con.createStatement();
             //int resID=3;
             //Integer RecurringResID=null; //we will remove this column but discuss first
             String query="Delete from Reservations Where ReservationID="+resID;
@@ -295,9 +331,12 @@ public class DBConnect {
     }
     public Reservation getreservation(int resID){ //this gets classroom ,data,time of areservation using its ID because it will be needed to handle cancel recurring 
              try{
+                 Statement st;
+            ResultSet rs;//used in register function
+            st = con.createStatement();
             //int resID=1;
             //Integer RecurringResID=null; //we will remove this column but discuss first
-            String query="Select * fROM Reservations Where ReservationID="+resID;
+            String query="Select * from Reservations Where ReservationID="+resID;
             rs=st.executeQuery(query);
             int flg=1;
             
@@ -310,9 +349,9 @@ public class DBConnect {
                 Reservation res=new Reservation();
                 res.setReservationID(resID);
                 res.setClassroom(getClassRoom(rs.getInt("ClassRoomID")));
-                res.setUserID(resID);
+                res.setUserID(rs.getInt("UserID"));
                 res.setTimeslot(rs.getString("TimeSlot"));
-                res.setDate(rs.getString("ResDate"));
+                res.setDate(rs.getObject("resDate",LocalDate.class));
                 res.setPriority(rs.getInt("Priority"));
                 res.setStatus(rs.getString("Status"));
                 res.setNumberofStudents(rs.getInt("NumberofStudents"));
@@ -321,11 +360,13 @@ public class DBConnect {
                 res.setComp(rs.getInt("Computer"));
                 res.setProj(rs.getInt("Projector"));
                 res.setSmart(rs.getInt("SmartBoard"));
+                
+                //System.out.println(res.getDate());
+
                 return res;
- //System.out.println(ClassroomID);
+                  //System.out.println(ClassroomID);
                 //System.out.println(Date);
                 //System.out.println(TimeSlot);
-                
             }
              }
         catch(Exception ex){
@@ -333,8 +374,11 @@ public class DBConnect {
             return null;
         }
     }
-    public Classroom getClassRoom(int ClassID){ //get the properties of a class by id and create a full class object
+    public Classroom getClassRoom(Integer ClassID){ //get the properties of a class by id and create a full class object
         try{
+            Statement st;
+            ResultSet rs;//used in register function
+            st = con.createStatement();
         
         String query="Select * from Classrooms Where ClassroomID="+ClassID;
         rs=st.executeQuery(query);
@@ -356,6 +400,9 @@ public class DBConnect {
     }         
     public Integer ChooseFromWaiting(String TimeSlot,String Date,Classroom freeclass){ //will return the reservation ID whose status will be changed from waiting to reserved
             try{
+                Statement st;
+            ResultSet rs;//used in register function
+            st = con.createStatement();
                 // these parameters come from the calling get class properties
                 //String Date="2016-06-24";
                 //String TimeSlot="11:50:00";
@@ -383,7 +430,10 @@ public class DBConnect {
     public Integer chooseAttackedReservation(Reservation res){ //return the attacked reservation ID for Emerency request
         try{    //we will already have attacking reservation object and its requirment
                 //so this function search reservations by requirments,date,time,priority
-                String Date=res.getDate();
+                Statement st;
+            ResultSet rs;//used in register function
+            st = con.createStatement();
+                String Date=res.getDate().toString();
                 String TimeSlot=res.getTimeslot();
                  int comp=res.getComp();
                  int mic=res.getMic();
@@ -414,6 +464,9 @@ public class DBConnect {
     }
     public void addEmergency(){
             try{
+                Statement st;
+            ResultSet rs;//used in register function
+            st = con.createStatement();
                 int PerpetratorID=16;
                 int VictimID=13;
                 String query="Insert Into EmergencyRequests(PerpetratorID,VictimID) Values("+PerpetratorID+","+VictimID+")";
@@ -424,11 +477,14 @@ public class DBConnect {
             }
         }
     
-    public Boolean changeReservationStatus(int ResID,int ClassroomID){ //used to reply to emergency
+    public Boolean changeReservationStatus(Integer ResID,Integer ClassroomID,String Status){ //used to reply to emergency
             try{
                 //int ResID=11;
                 //int ClassroomID=145;
-                String query="UPDATE Reservations SET ClassRoomID=" +ClassroomID+" ,Status='reserved' WHERE ReservationID=" + ResID;
+                Statement st;
+            ResultSet rs;//used in register function
+            st = con.createStatement();
+                String query="UPDATE Reservations SET ClassRoomID=" +ClassroomID+" ,Status='"+Status+"' WHERE ReservationID=" + ResID;
                 st.executeUpdate(query);
                 return true;
             }
@@ -440,6 +496,9 @@ public class DBConnect {
     
     public Boolean addemail(int resID,String Email){
             try{
+                Statement st;
+            ResultSet rs;//used in register function
+            st = con.createStatement();
                 //int resID= 1;
                 //String Email="s-kfdfd@gmail.com";
                 String query="Insert Into EmailLists(ReservationID,Email) Values("+resID+",'"+Email+"')";
@@ -451,6 +510,56 @@ public class DBConnect {
                 return false;
             }
         }
+    public Boolean deleteEmergencyRequest(EmergencyRequest req){
+            try{
+                Statement st;
+            ResultSet rs;//used in register function
+            st = con.createStatement();
+            Integer reqID=req.getRequestID();
+            String query="Delete from EmergencyRequests Where RequestID="+reqID;
+            st.executeQuery(query);
+            return true;
+            }
+            catch(Exception ex){return false;}
+    }
+    public ArrayList<EmergencyRequest> getEmergencyRequests(){
+            try{
+             Statement st;
+            ResultSet rs;//used in register function
+            st = con.createStatement();
+            String query="Select * from EmergencyRequests";
+            rs=st.executeQuery(query);
+            ArrayList<EmergencyRequest> Emergrequests=new ArrayList();
+            while(rs.next()){
+                 EmergencyRequest req=new EmergencyRequest();
+                 req.setRequestID(rs.getInt("RequestID"));
+                 req.setMyReservation(this.getreservation(rs.getInt("PerpetratorID")));
+                 req.setReplacementReservation(this.getreservation(rs.getInt("VictimID")));
+                 Emergrequests.add(req);
+            }
+            return Emergrequests;
+            }
+            catch(Exception ex){return null;}
+    }
+    public EmergencyRequest getEmergencyreq(Integer reqID){
+        try{
+            Statement st;
+            ResultSet rs;//used in register function
+            st = con.createStatement();
+            String query="Select * from EmergencyRequests where RequestID="+reqID;
+            rs=st.executeQuery(query);
+            rs.next();
+              EmergencyRequest req=new EmergencyRequest();
+              req.setRequestID(rs.getInt("RequestID"));
+              req.setMyReservation(this.getreservation(rs.getInt("PerpetratorID")));
+              req.setReplacementReservation(this.getreservation(rs.getInt("VictimID")));
+              return req;   
+        }
+        catch(Exception ex){return null ;}
+    }
+    
   // schedule shift not written
+//   system clean up 
+    
 }
 

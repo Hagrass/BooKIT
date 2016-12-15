@@ -9,6 +9,8 @@ package db_mysql_lab7;
  *
  * @author root
  */
+import java.time.LocalDate;
+import java.time.Month;
 import java.util.*;
 
 public class PremiumUser extends User {
@@ -22,8 +24,8 @@ public class PremiumUser extends User {
        Boolean flg=connect.addreservation(res);
        return flg;
     }
-    public ArrayList viewmyReservation(String startDate,String endDate){
-        ArrayList myReservations;
+    public ArrayList<Reservation> viewmyReservation(String startDate,String endDate){
+        ArrayList<Reservation> myReservations;
         myReservations=connect.viewmyreservation(this.userID,startDate,endDate);
         return myReservations;
     } 
@@ -34,8 +36,8 @@ public class PremiumUser extends User {
             return false;
         }
         else{
-            Integer waiting_resID=connect.ChooseFromWaiting(res.getTimeslot(), res.getDate(), res.getClassroom());
-            flg=connect.changeReservationStatus(waiting_resID,res.getClassroom().getClassroomID());
+            Integer waiting_resID=connect.ChooseFromWaiting(res.getTimeslot(), res.getDate().toString(), res.getClassroom());
+            flg=connect.changeReservationStatus(waiting_resID,res.getClassroom().getClassroomID(),"reserved");
             return flg;
         }
     }
@@ -46,9 +48,7 @@ public class PremiumUser extends User {
         }
         return true;
     }
-    public Boolean NotifyUsers(Reservation res,int Status){
-        return null;
-    }
+  
     public EmergencyRequest requestEmergencyRequest(Reservation res){
         
         Integer victimresID=connect.chooseAttackedReservation(res);
@@ -60,5 +60,19 @@ public class PremiumUser extends User {
     public void RequestRecurring(){
         
     }
+      public Boolean NotifyUsers(Reservation res,int Status){
+        return null;
+    }
+      public void CancelRecurring(Reservation res) throws CloneNotSupportedException {
+          Reservation currentRes=(Reservation) res.clone();
+         LocalDate lastdate=LocalDate.of(2017, Month.JANUARY, 14);
+        while(currentRes.getDate().compareTo(lastdate)!=1) {//we can add multiple checks here
+            this.cancelReservation(currentRes);
+            int resID=currentRes.getReservationID()+1;
+            currentRes=connect.getreservation(resID);
+        }        
+          
+      }
 }
+
     

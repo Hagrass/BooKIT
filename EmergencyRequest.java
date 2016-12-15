@@ -10,8 +10,17 @@ package db_mysql_lab7;
  * @author root
  */
 public class EmergencyRequest {
+    private Integer requestID; 
     private Reservation MyReservation;
     private Reservation ReplacementReservation;
+
+    public Integer getRequestID() {
+        return requestID;
+    }
+
+    public void setRequestID(Integer requestID) {
+        this.requestID = requestID;
+    }
 
     public Reservation getMyReservation() {
         return MyReservation;

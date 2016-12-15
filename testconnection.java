@@ -4,19 +4,95 @@
  * and open the template in the editor.
  */
 package db_mysql_lab7;
-
+import java.util.*;
+import java.time.*;
+//import java.time.te   mporal.ChronoUnit;
 /**
  *
  * @author root
  */
+
 public class testconnection {
     
 
 
      public static void main(String[] args) {
          
+          //LocalDate date1=LocalDate.of(2016, Month.DECEMBER, 14);
+          //System.out.println("date1: " + date1.toString());
+          //LocalDate date2=date1.plus(3,ChronoUnit.WEEKS);
+          //System.out.println("date2: " + date2);
+          //int flg=date2.compareTo(date1);
+          //System.out.println(flg);
        DBConnect connect = new DBConnect();
-      //connect.Register();   
-     }
+       //Reservation ress=connect.getreservation(4);
+       //System.out.println(ress.getDate());
+       PremiumUser curuser=new PremiumUser(connect);
+       Reservation res=new Reservation();
+       curuser.setUserID(20134567);
+       Classroom room=new Classroom();
+       room.setClassroomID(null);
+       res.setClassroom(room);
+       res.setTimeslot("09:30:00");
+       res.setDate(LocalDate.of(2016, Month.JUNE, 24));
+       res.setUserID(curuser.getUserID());
+       res.setPriority(45);
+       res.setStatus("waiting");
+       res.setNumberofStudents(20);
+       res.setPurpose("Lecture");
+       res.setMic(1);
+       res.setProj(1);
+       res.setComp(1);
+       res.setSmart(1);
+      //curuser.reserveClass(res);
+       //EmergencyRequest req=curuser.requestEmergencyRequest(res);
+       Admin pop=new Admin(connect);
+      // pop.ReplayEmergencyRequest(req);
+      // curuser.cancelReservation(connect.getreservation(22));
+       //ArrayList emails=new ArrayList();
+       //emails.add("fsdfsdfdsfsdf");
+       //emails.add("ewhjgjggjfgf");
+       
+       //curuser.addEmaillist(connect.getreservation(9), emails);
+       
+               
+//ArrayList<Reservation> ress=curuser.viewmyReservation("2016-02-25", "2016-06-25");
+     //   System.out.println(req.getMyReservation().getReservationID());
+       // for(Reservation x:ress){
+       // System.out.println(x.getReservationID());
+      //  }
+       /* 
+       ArrayList<MyPair> test=new ArrayList();
+       MyPair x=new MyPair(5,1);
+       test.add(x);
+       x=null;
+       x=new MyPair(6,2);
+       test.add(x);
+       x=null;
+       x=new MyPair(5,3);
+       test.add(x);
+       Collections.sort(test);
+       for(MyPair temp:test){
+          //System.out.println(temp.getCount()+" "+temp.getRoomID());
+       
+               }
+       Map<Integer,Integer> mymap=new TreeMap<Integer,Integer>();
+       mymap.put(7,1 );
+       mymap.put(4,1);
+       mymap.put(5,1);
+       System.out.println(mymap.containsKey(4)+" " + mymap.get(4));
+       
+       for(Map.Entry<Integer,Integer> temp:mymap.entrySet()){
+          //System.out.println(temp.getKey()+" "+temp.getValue());
+           
+          }
+       ArrayList<TreeSet<Integer>> slotRooms=new ArrayList<TreeSet<Integer>>();
+       TreeSet Slot1=new TreeSet();
+       Slot1.add(5); 
+       */
+       
     
 }
+}
+
+     

@@ -9,7 +9,8 @@ package db_mysql_lab7;
  *
  * @author root
  */
-public class Reservation {
+import java.time.*;
+public class Reservation implements Cloneable {
     protected int reservationID;
     protected Classroom classroom;
     protected int comp;
@@ -19,9 +20,10 @@ public class Reservation {
     protected int NumberofStudents;
     protected String status;
     protected String Timeslot;
-    protected String Date;
+    protected LocalDate Date;
     protected String Purpose;
     protected int UserID;
+    protected int priority;
 
     public int getUserID() {
         return UserID;
@@ -68,18 +70,17 @@ public class Reservation {
         this.Timeslot = Timeslot;
     }
 
-    public String getDate() {
+    public LocalDate getDate() {
         return Date;
     }
 
-    public void setDate(String Date) {
+    public void setDate(LocalDate Date) {
         this.Date = Date;
     }
 
     public void setPriority(int priority) {
         this.priority = priority;
     }
-    protected int priority;
     public int getComp() {
         return comp;
     }
@@ -127,6 +128,10 @@ public class Reservation {
 
     public void setClassroom(Classroom classroom) {
         this.classroom = classroom;
+    }
+    
+    protected Object clone()  throws CloneNotSupportedException{
+        return super.clone();
     }
     
 }
