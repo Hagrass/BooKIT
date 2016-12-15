@@ -27,27 +27,44 @@ public class testconnection {
        DBConnect connect = new DBConnect();
        //Reservation ress=connect.getreservation(4);
        //System.out.println(ress.getDate());
-       PremiumUser curuser=new PremiumUser(connect);
+       //PremiumUser curuser=new PremiumUser(connect);
+       /*
        Reservation res=new Reservation();
-       curuser.setUserID(20134567);
+       //curuser.setUserID(20134567);
        Classroom room=new Classroom();
        room.setClassroomID(null);
        res.setClassroom(room);
        res.setTimeslot("09:30:00");
-       res.setDate(LocalDate.of(2016, Month.JUNE, 24));
-       res.setUserID(curuser.getUserID());
+       res.setDate(LocalDate.of(2016, Month.DECEMBER,15));
+       res.setUserID(20134567);
        res.setPriority(45);
-       res.setStatus("waiting");
+       res.setStatus("recurringWaiting");
        res.setNumberofStudents(20);
        res.setPurpose("Lecture");
-       res.setMic(1);
-       res.setProj(1);
-       res.setComp(1);
-       res.setSmart(1);
-      //curuser.reserveClass(res);
+       res.setMic(0);
+       res.setProj(0);
+       res.setComp(0);
+       res.setSmart(0);
+      *///curuser.reserveClass(res);
        //EmergencyRequest req=curuser.requestEmergencyRequest(res);
+       PremiumUser hh=new PremiumUser(connect);
        Admin pop=new Admin(connect);
-      // pop.ReplayEmergencyRequest(req);
+       //pop.reserveClass(res);
+       Reservation res=connect.getreservation(42);
+       System.out.println(res.getUserID());
+       //try{
+       //ArrayList<Integer> xx=pop.GenerateRecurringReport(res);
+       //System.out.print(xx);
+       //pop.ApproveRecurringRequest(xx, res);
+
+       
+       //}
+      // catch (Exception ex){};
+      try{
+       hh.CancelRecurring(res);
+      }
+      catch (Exception ex ){}
+       // pop.ReplayEmergencyRequest(req);
       // curuser.cancelReservation(connect.getreservation(22));
        //ArrayList emails=new ArrayList();
        //emails.add("fsdfsdfdsfsdf");
