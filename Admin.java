@@ -43,13 +43,13 @@ public class Admin extends PremiumUser {
          //assume last week data given
          LocalDate lastdate=LocalDate.of(2017, Month.JANUARY, 14);
          
-         
+         //System.out.println(lastdate);
        
          Reservation res=(Reservation) recurRes.clone();
        
          Map<Integer,Integer> Roomsmap=new TreeMap();
          ArrayList<ArrayList<Integer>> saverooms=new ArrayList(); 
-         while((res.getDate().compareTo(lastdate))!=1){
+         while((res.getDate().compareTo(lastdate))<=0){
          
          
          ArrayList<Integer> rooms=connect.SearchAvaliableClasses(res.getDate().toString(), res.getTimeslot(), res.getNumberofStudents(), res.getMic(), res.getComp(),res.getProj(), res.getSmart());
@@ -63,7 +63,8 @@ public class Admin extends PremiumUser {
              
          }
          res.setDate(res.getDate().plus(1,ChronoUnit.WEEKS));
-         
+        //System.out.println("1"+res.getDate());
+
          }
          ArrayList<Integer> report=new ArrayList();
          res.setDate(recurRes.getDate());
@@ -75,7 +76,8 @@ public class Admin extends PremiumUser {
          }
          Collections.sort(sortedrooms);
          
-         while((res.getDate().compareTo(lastdate))!=1){
+         while((res.getDate().compareTo(lastdate))<=0){
+             //System.out.println(res.getDate());
              int i=0;
              int j=0;
              int flg=0;
@@ -87,12 +89,16 @@ public class Admin extends PremiumUser {
                   report.add(null);
               }
               else report.add(sortedrooms.get(j).getRoomID());
+           res.setDate(res.getDate().plus(1,ChronoUnit.WEEKS));
+
          }
          return report;
      }
      
      public void ApproveRecurringRequest(ArrayList<Integer> report, Reservation recurrRes){
          Reservation res=recurrRes;
+         //connect.DeleteReservation(res.getReservationID());
+         
         for (Integer report1 : report) {
             res.setClassroom(connect.getClassRoom(report1));
             res.setStatus("recurringreserved");

@@ -66,7 +66,7 @@ public class PremiumUser extends User {
       public void CancelRecurring(Reservation res) throws CloneNotSupportedException {
           Reservation currentRes=(Reservation) res.clone();
          LocalDate lastdate=LocalDate.of(2017, Month.JANUARY, 14);
-        while(currentRes.getDate().compareTo(lastdate)!=1) {//we can add multiple checks here
+        while(currentRes.getDate().compareTo(lastdate)<=0) {//we can add multiple checks here
             this.cancelReservation(currentRes);
             int resID=currentRes.getReservationID()+1;
             currentRes=connect.getreservation(resID);

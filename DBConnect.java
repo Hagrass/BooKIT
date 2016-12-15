@@ -21,8 +21,8 @@ public class DBConnect {
     public DBConnect() {       //sql7.freemysqlhosting.net                  
  try {
      Class.forName("com.mysql.jdbc.Driver");
-    con = DriverManager.getConnection("jdbc:mysql://10.2.101.59:13306/sql7148349", "root", "921949");
-//con = DriverManager.getConnection("jdbc:mysql://sql7.freemysqlhosting.net:3306/sql7148349", "sql7148349", "CznnP1w1TK");
+    //con = DriverManager.getConnection("jdbc:mysql://10.2.101.59:13306/sql7148349", "root", "921949");
+    con = DriverManager.getConnection("jdbc:mysql://sql7.freemysqlhosting.net:3306/sql7148349", "sql7148349", "CznnP1w1TK");
     
  } 
  catch (Exception ex) {
@@ -255,20 +255,22 @@ public class DBConnect {
        }
        
     }
-    public void getMaxrecurringID(){ //useg to get the next recurring ID
+    public Integer getnextresID(){ //useg to get the next recurring ID
         
         try{
             Statement st;
             ResultSet rs;//used in register function
             st = con.createStatement();
-            String query="Select Max(RecurringResID) AS 'ResID' FROM Reservations";
+            String query="Select Max(ReservationID) AS 'ResID' FROM Reservations";
             rs=st.executeQuery(query);
             rs.next();
             int resID=rs.getInt("ResID");
-            System.out.println(resID);
+            //System.out.println(resID);
+            return resID+1;
         }
         catch(Exception ex){
             System.out.println(ex);
+            return null;
         }
         
     }
@@ -348,7 +350,16 @@ public class DBConnect {
             else{
                 Reservation res=new Reservation();
                 res.setReservationID(resID);
-                res.setClassroom(getClassRoom(rs.getInt("ClassRoomID")));
+                Integer roomID=rs.getInt("ClassRoomID");
+               // System.out.println(roomID);
+
+                if (roomID==0) 
+                {
+                    //System.out.println(roomID);
+                    res.setClassroom(new Classroom());
+                    
+                }
+                else res.setClassroom(getClassRoom(roomID));
                 res.setUserID(rs.getInt("UserID"));
                 res.setTimeslot(rs.getString("TimeSlot"));
                 res.setDate(rs.getObject("resDate",LocalDate.class));
