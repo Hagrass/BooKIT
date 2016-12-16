@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package db_mysql_lab7;
+package projecttt;
 
 /**
  *
@@ -52,6 +52,7 @@ public class PremiumUser extends User {
     public EmergencyRequest requestEmergencyRequest(Reservation res){
         
         Integer victimresID=connect.chooseAttackedReservation(res);
+        if(victimresID==null) return null;
         EmergencyRequest emgreq=new EmergencyRequest();
         emgreq.setMyReservation(res);
         emgreq.setReplacementReservation(connect.getreservation(victimresID));

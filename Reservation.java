@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package db_mysql_lab7;
+package projecttt;
 
 /**
  *
@@ -124,6 +124,39 @@ public class Reservation implements Cloneable {
 
     public Classroom getClassroom() {
         return classroom;
+    }
+    public void calPriority(String position){
+
+    	//mj=4 //TA=6 // docto=9     'Lecture 4'=,'Tutorial 3','Exam 6','Seminar 5','StudentActivity 2','Meeting 1'  
+    	        int x=0,y=0;
+    	        switch (position){
+    	            case "MajorRepresentative": x=4;
+    	            
+    	                    break;
+    	            case "TA": x=6;
+    	                break;
+    	            case "Professor": x=9;
+    	                break;
+    	            
+    	        }
+    	        switch (this.Purpose){
+    	            case "Lecture": y=4;
+    	                break;
+    	            case "Tutorial": y=3;
+    	                break;
+    	            case "Exam": y=6;
+    	                break;
+    	            case "Seminar": y=5;
+    	                break;
+    	            case "StudentActivity": y=2;
+    	                break;
+    	            case "Meeting": y=1;
+    	                    break;
+    	        }
+    	        if(position.equals("Admin")){
+    	            this.priority=1000;
+    	        }
+    	        else this.priority=x*y;
     }
 
     public void setClassroom(Classroom classroom) {

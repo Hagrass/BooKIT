@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package db_mysql_lab7;
+package projecttt;
 
 /**
  *
@@ -78,8 +78,8 @@ public class User {
         }
     }
     
-    public ArrayList viewAvailableRooms(String Time,String Date){
-        ArrayList Availablerooms= new ArrayList();
+    public ArrayList<Integer> viewAvailableRooms(String Time,String Date){
+        ArrayList <Integer> Availablerooms;
         Availablerooms=connect.SearchAvaliableClasses(Date, Time, 0, 0, 0, 0, 0);
         return Availablerooms;
     }

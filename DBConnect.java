@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package db_mysql_lab7;
+package projecttt;
 
 /**
  *
@@ -170,7 +170,7 @@ public class DBConnect {
                    return null;
         }
     }
-     public User Login(int UserID,String Password){
+     public User Login(Integer UserID,String Password){
         Boolean flg=this.checkuserwithIDandpassword(UserID, Password);
         if(flg==false){
             return null;
@@ -182,7 +182,7 @@ public class DBConnect {
         
         
     }
-        public Boolean Register(int UserID,String UniversityPosition,String Password,String Email,String Phone){
+        public Boolean Register(Integer UserID,String UniversityPosition,String Password,String Email,String Phone){
                Boolean flg=this.checkuserwithIDorEmail(UserID,Email);
                if(flg==true) return false;
                flg=this.insertuser(UserID,UniversityPosition,Password,Email,Phone); //flg is true when registeration is done
@@ -266,7 +266,7 @@ public class DBConnect {
             rs.next();
             int resID=rs.getInt("ResID");
             //System.out.println(resID);
-            return resID+1;
+            return resID;
         }
         catch(Exception ex){
             System.out.println(ex);
@@ -291,7 +291,13 @@ public class DBConnect {
                 if(flg==0) flg=1;
                 Reservation res=new Reservation();
                 res.setReservationID(rs.getInt("ReservationID"));
-                res.setClassroom(getClassRoom(rs.getInt("ClassRoomID")));
+                int x=rs.getInt("ClassRoomID");
+                if(x==0){
+                	Classroom roomm=new Classroom();
+                	roomm.setClassroomID(0);
+                	res.setClassroom(roomm);
+                }
+                else res.setClassroom(getClassRoom(x));
                 res.setUserID(rs.getInt("UserID"));
                 res.setTimeslot(rs.getString("TimeSlot"));
                 res.setDate(rs.getObject("resDate",LocalDate.class));
@@ -473,19 +479,21 @@ public class DBConnect {
             return null;
         }
     }
-    public void addEmergency(){
+    public Boolean addEmergency(EmergencyRequest req){
             try{
                 Statement st;
             ResultSet rs;//used in register function
             st = con.createStatement();
-                int PerpetratorID=16;
-                int VictimID=13;
+                int PerpetratorID=req.getMyReservation().getReservationID();
+                int VictimID=req.getReplacementReservation().getReservationID();
                 String query="Insert Into EmergencyRequests(PerpetratorID,VictimID) Values("+PerpetratorID+","+VictimID+")";
                 st.executeUpdate(query);
+                return true;
             }
             catch(Exception ex){
-                System.out.println(ex);
+                return false;
             }
+            
         }
     
     public Boolean changeReservationStatus(Integer ResID,Integer ClassroomID,String Status){ //used to reply to emergency
