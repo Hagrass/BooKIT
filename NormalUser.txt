@@ -1,0 +1,602 @@
+package learn;
+
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+import java.awt.Font;
+import javax.swing.JButton;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import java.awt.Color;
+import javax.swing.JComboBox;
+import javax.swing.JTextPane;
+import javax.swing.JList;
+import javax.swing.AbstractListModel;
+import javax.swing.ListSelectionModel;
+import javax.swing.border.BevelBorder;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.JTextField;
+import javax.swing.JTextArea;
+import javax.swing.JCheckBox;
+import java.awt.CardLayout;
+
+public class NormalUser extends JFrame {
+
+	private JPanel contentPane;
+	private JTextField textField;
+	private JTable table;
+	private JTextField textField_1;
+	private JTable table_1;
+	private JTable table_2;
+	private JTable table_3;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					NormalUser frame = new NormalUser();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public NormalUser() {
+		
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 700, 500);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(new CardLayout(0, 0));
+		
+		JPanel AddClass = new JPanel();
+		contentPane.add(AddClass, "name_62078628218909");
+		AddClass.setLayout(null);
+		
+		JPanel panel_1 = new JPanel();
+		panel_1.setLayout(null);
+		panel_1.setBounds(0, 0, 678, 454);
+		AddClass.add(panel_1);
+		
+		table_2 = new JTable();
+		table_2.setModel(new DefaultTableModel(
+			new Object[][] {
+				{"Classroom Number", "Number of chairs", "Equipments"},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+			},
+			new String[] {
+				"New column", "New column", "New column"
+			}
+		));
+		table_2.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		table_2.setEnabled(false);
+		table_2.setBounds(39, 96, 599, 240);
+		panel_1.add(table_2);
+		
+		JLabel lblAddClassrooomPage = new JLabel("Add Classrooom Page");
+		lblAddClassrooomPage.setFont(new Font("Tahoma", Font.PLAIN, 22));
+		lblAddClassrooomPage.setBounds(190, 24, 374, 51);
+		panel_1.add(lblAddClassrooomPage);
+		
+		JButton btnAddTheEntered = new JButton("Add The Entered Classes");
+		btnAddTheEntered.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		btnAddTheEntered.setBounds(171, 381, 304, 42);
+		panel_1.add(btnAddTheEntered);
+		
+		JPanel reocurringbooking = new JPanel();
+		contentPane.add(reocurringbooking, "name_62078561866832");
+		reocurringbooking.setLayout(null);
+		
+		JLabel lblReoccurringBookingsRequests = new JLabel("Reoccurring Bookings Requests Page");
+		lblReoccurringBookingsRequests.setFont(new Font("Tahoma", Font.PLAIN, 22));
+		lblReoccurringBookingsRequests.setBounds(147, 37, 384, 65);
+		reocurringbooking.add(lblReoccurringBookingsRequests);
+		
+		table_3 = new JTable();
+		table_3.setModel(new DefaultTableModel(
+			new Object[][] {
+				{"Date", "Time", "priority", "UserName", "Purpose"},
+				{null, null, null, null, null},
+				{null, null, null, null, null},
+				{null, null, null, null, null},
+				{null, null, null, null, null},
+				{null, null, null, null, null},
+				{null, null, null, null, null},
+				{null, null, null, null, null},
+				{null, null, null, null, null},
+				{null, null, null, null, null},
+				{null, null, null, null, null},
+				{null, null, null, null, null},
+				{null, null, null, null, null},
+				{null, null, null, null, null},
+				{null, null, null, null, null},
+				{null, null, null, null, null},
+				{null, null, null, null, null},
+				{null, null, null, null, null},
+				{null, null, null, null, null},
+				{null, null, null, null, null},
+			},
+			new String[] {
+				"New column", "New column", "New column", "New column", "New column"
+			}
+		));
+		table_3.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		table_3.setEnabled(false);
+		table_3.setBounds(154, 134, 487, 240);
+		reocurringbooking.add(table_3);
+		
+		JList list_4 = new JList();
+		list_4.setBounds(70, 146, 74, 228);
+		reocurringbooking.add(list_4);
+		
+		JLabel lblReservationId = new JLabel("Reservation ID");
+		lblReservationId.setBounds(70, 126, 74, 22);
+		reocurringbooking.add(lblReservationId);
+		
+		JButton btnApproveTheSelected_1 = new JButton("Approve the selected request");
+		btnApproveTheSelected_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		btnApproveTheSelected_1.setBounds(188, 385, 272, 58);
+		reocurringbooking.add(btnApproveTheSelected_1);
+		
+		JPanel Emergencyreq = new JPanel();
+		contentPane.add(Emergencyreq, "name_62078678495681");
+		Emergencyreq.setLayout(null);
+		
+		JPanel panel = new JPanel();
+		panel.setLayout(null);
+		panel.setBounds(0, 11, 678, 454);
+		Emergencyreq.add(panel);
+		
+		table_1 = new JTable();
+		table_1.setModel(new DefaultTableModel(
+			new Object[][] {
+				{"priority 1", "priority 2", "Date & Time", "Classroom Number"},
+				{null, null, null, null},
+				{null, null, null, null},
+				{null, null, null, null},
+				{null, null, null, null},
+				{null, null, null, null},
+				{null, null, null, null},
+				{null, null, null, null},
+				{null, null, null, null},
+				{null, null, null, null},
+				{null, null, null, null},
+				{null, null, null, null},
+				{null, null, null, null},
+				{null, null, null, null},
+				{null, null, null, null},
+				{null, null, null, null},
+				{null, null, null, null},
+				{null, null, null, null},
+				{null, null, null, null},
+				{null, null, null, null},
+			},
+			new String[] {
+				"New column", "New column", "New column", "New column"
+			}
+		));
+		table_1.getColumnModel().getColumn(2).setPreferredWidth(155);
+		table_1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		table_1.setEnabled(false);
+		table_1.setBounds(151, 96, 487, 240);
+		panel.add(table_1);
+		
+		JLabel lblEmergencyRequestList = new JLabel("Emergency request list page");
+		lblEmergencyRequestList.setFont(new Font("Tahoma", Font.PLAIN, 22));
+		lblEmergencyRequestList.setBounds(141, 24, 374, 51);
+		panel.add(lblEmergencyRequestList);
+		
+		JList list_3 = new JList();
+		list_3.setBounds(74, 108, 74, 228);
+		panel.add(list_3);
+		
+		JButton btnApproveTheSelected = new JButton("Approve the selected request");
+		btnApproveTheSelected.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		btnApproveTheSelected.setBounds(171, 381, 304, 42);
+		panel.add(btnApproveTheSelected);
+		
+		JLabel lblResId = new JLabel("Reservation ID");
+		lblResId.setBounds(74, 96, 72, 14);
+		panel.add(lblResId);
+		
+		JPanel ScheduleShift = new JPanel();
+		contentPane.add(ScheduleShift, "name_62078735544831");
+		ScheduleShift.setLayout(null);
+		
+		JLabel lblScheduleShiftPage = new JLabel("Schedule Shift Page");
+		lblScheduleShiftPage.setFont(new Font("Tahoma", Font.PLAIN, 22));
+		lblScheduleShiftPage.setBounds(223, 11, 298, 60);
+		ScheduleShift.add(lblScheduleShiftPage);
+		
+		JLabel lblDate_2 = new JLabel("Date");
+		lblDate_2.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblDate_2.setBounds(63, 130, 123, 32);
+		ScheduleShift.add(lblDate_2);
+		
+		JLabel lblShiftingHours = new JLabel("Shifting Hours");
+		lblShiftingHours.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblShiftingHours.setBounds(63, 187, 123, 32);
+		ScheduleShift.add(lblShiftingHours);
+		
+		JComboBox comboBox_5 = new JComboBox();
+		comboBox_5.setBounds(263, 139, 150, 20);
+		ScheduleShift.add(comboBox_5);
+		
+		textField_1 = new JTextField();
+		textField_1.setBounds(263, 187, 150, 29);
+		ScheduleShift.add(textField_1);
+		textField_1.setColumns(10);
+		
+		JLabel lblShiftStartAt = new JLabel("Shift starts at");
+		lblShiftStartAt.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblShiftStartAt.setBounds(63, 258, 123, 32);
+		ScheduleShift.add(lblShiftStartAt);
+		
+		JLabel lblFinishesAt = new JLabel("Finishes at");
+		lblFinishesAt.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblFinishesAt.setBounds(369, 258, 95, 32);
+		ScheduleShift.add(lblFinishesAt);
+		
+		JComboBox comboBox_6 = new JComboBox();
+		comboBox_6.setBounds(196, 267, 150, 20);
+		ScheduleShift.add(comboBox_6);
+		
+		JComboBox comboBox_7 = new JComboBox();
+		comboBox_7.setBounds(474, 267, 150, 20);
+		ScheduleShift.add(comboBox_7);
+		
+		JPanel Admin = new JPanel();
+		contentPane.add(Admin, "name_62078780614141");
+		Admin.setLayout(null);
+		
+		JLabel lblAdminMainPage = new JLabel("Admin Main Page");
+		lblAdminMainPage.setFont(new Font("Tahoma", Font.PLAIN, 22));
+		lblAdminMainPage.setBounds(233, 29, 285, 42);
+		Admin.add(lblAdminMainPage);
+		
+		JButton btnViewRooms_1 = new JButton("View Rooms");
+		btnViewRooms_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		btnViewRooms_1.setBounds(41, 119, 211, 42);
+		Admin.add(btnViewRooms_1);
+		
+		JButton btnReserve = new JButton("Reserve");
+		btnReserve.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		btnReserve.setBounds(41, 212, 211, 42);
+		Admin.add(btnReserve);
+		
+		JButton btnVieweditReservations = new JButton("View/Edit Reservations");
+		btnVieweditReservations.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		btnVieweditReservations.setBounds(41, 299, 211, 42);
+		Admin.add(btnVieweditReservations);
+		
+		JButton btnScheduleShift = new JButton("Schedule Shift");
+		btnScheduleShift.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		btnScheduleShift.setBounds(290, 119, 313, 42);
+		Admin.add(btnScheduleShift);
+		
+		JButton btnUpdateSchedule = new JButton("Update Schedule");
+		btnUpdateSchedule.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		btnUpdateSchedule.setBounds(290, 212, 313, 42);
+		Admin.add(btnUpdateSchedule);
+		
+		JButton btnViewEmergencyRequests = new JButton("View Emergency Requests");
+		btnViewEmergencyRequests.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		btnViewEmergencyRequests.setBounds(290, 299, 313, 42);
+		Admin.add(btnViewEmergencyRequests);
+		
+		JButton btnAddAClassroom = new JButton("Add a Classroom");
+		btnAddAClassroom.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		btnAddAClassroom.setBounds(41, 383, 211, 42);
+		Admin.add(btnAddAClassroom);
+		
+		JButton btnViewReocurringBooking = new JButton("View reocurring booking requests");
+		btnViewReocurringBooking.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		btnViewReocurringBooking.setBounds(290, 383, 313, 42);
+		Admin.add(btnViewReocurringBooking);
+		
+		JLabel label = new JLabel("5");
+		label.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		label.setBounds(625, 299, 43, 42);
+		Admin.add(label);
+		
+		JLabel label_1 = new JLabel("2");
+		label_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		label_1.setBounds(625, 383, 43, 42);
+		Admin.add(label_1);
+		
+		JPanel Roomreservationsearch = new JPanel();
+		contentPane.add(Roomreservationsearch, "name_62078842641392");
+		Roomreservationsearch.setLayout(null);
+		
+		JLabel lblRoomReservationPostsearch = new JLabel("Room Reservation PostSearch");
+		lblRoomReservationPostsearch.setFont(new Font("Tahoma", Font.PLAIN, 22));
+		lblRoomReservationPostsearch.setBounds(173, 11, 320, 37);
+		Roomreservationsearch.add(lblRoomReservationPostsearch);
+		
+		JLabel lblAddEmailList = new JLabel("Add email list");
+		lblAddEmailList.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblAddEmailList.setBounds(79, 74, 136, 31);
+		Roomreservationsearch.add(lblAddEmailList);
+		
+		JTextArea textArea = new JTextArea();
+		textArea.setBounds(58, 116, 252, 265);
+		Roomreservationsearch.add(textArea);
+		
+		JList list_1 = new JList();
+		list_1.setModel(new AbstractListModel() {
+			String[] values = new String[] {"Class 145", "Class 140", "Class 123", "Class 116", "Class 111", ".", "."};
+			public int getSize() {
+				return values.length;
+			}
+			public Object getElementAt(int index) {
+				return values[index];
+			}
+		});
+		list_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		list_1.setBounds(387, 113, 194, 268);
+		Roomreservationsearch.add(list_1);
+		
+		JLabel lblSuitibleClassRoom = new JLabel("Suitible Class Room");
+		lblSuitibleClassRoom.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblSuitibleClassRoom.setBounds(387, 74, 200, 31);
+		Roomreservationsearch.add(lblSuitibleClassRoom);
+		
+		JButton btnEmergencyReservationRequest = new JButton("Emergency Reservation Request");
+		btnEmergencyReservationRequest.setForeground(Color.RED);
+		btnEmergencyReservationRequest.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		btnEmergencyReservationRequest.setBounds(29, 392, 313, 37);
+		Roomreservationsearch.add(btnEmergencyReservationRequest);
+		
+		JButton btnReserveTheSelected = new JButton("Reserve The Selected Room");
+		btnReserveTheSelected.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		btnReserveTheSelected.setBounds(387, 392, 252, 37);
+		Roomreservationsearch.add(btnReserveTheSelected);
+		
+		JPanel RoomReservation = new JPanel();
+		contentPane.add(RoomReservation, "name_62078899326867");
+		RoomReservation.setLayout(null);
+		
+		JLabel lblRoomReservationPage = new JLabel("Room Reservation Page");
+		lblRoomReservationPage.setFont(new Font("Tahoma", Font.PLAIN, 22));
+		lblRoomReservationPage.setBounds(187, 35, 255, 50);
+		RoomReservation.add(lblRoomReservationPage);
+		
+		JLabel lblDate_1 = new JLabel("Date");
+		lblDate_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblDate_1.setBounds(97, 144, 108, 22);
+		RoomReservation.add(lblDate_1);
+		
+		JLabel lblTime_1 = new JLabel("Time");
+		lblTime_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblTime_1.setBounds(97, 185, 108, 22);
+		RoomReservation.add(lblTime_1);
+		
+		JLabel lblPurpose = new JLabel("Purpose");
+		lblPurpose.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblPurpose.setBounds(97, 231, 108, 22);
+		RoomReservation.add(lblPurpose);
+		
+		JLabel lblEquipment = new JLabel("Equipment");
+		lblEquipment.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblEquipment.setBounds(97, 277, 108, 22);
+		RoomReservation.add(lblEquipment);
+		
+		JLabel lblNumberOfChairs = new JLabel("Number of chairs");
+		lblNumberOfChairs.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblNumberOfChairs.setBounds(97, 328, 145, 22);
+		RoomReservation.add(lblNumberOfChairs);
+		
+		JComboBox comboBox_2 = new JComboBox();
+		comboBox_2.setBounds(367, 148, 151, 20);
+		RoomReservation.add(comboBox_2);
+		
+		JComboBox comboBox_3 = new JComboBox();
+		comboBox_3.setBounds(367, 189, 151, 20);
+		RoomReservation.add(comboBox_3);
+		
+		JComboBox comboBox_4 = new JComboBox();
+		comboBox_4.setBounds(367, 235, 151, 20);
+		RoomReservation.add(comboBox_4);
+		
+		textField = new JTextField();
+		textField.setBounds(367, 332, 151, 20);
+		RoomReservation.add(textField);
+		textField.setColumns(10);
+		
+		JButton btnNewButton = new JButton("Begin Search");
+		btnNewButton.setBounds(222, 384, 166, 37);
+		RoomReservation.add(btnNewButton);
+		
+		JCheckBox chckbxNewCheckBox = new JCheckBox("projector");
+		chckbxNewCheckBox.setBounds(232, 280, 97, 23);
+		RoomReservation.add(chckbxNewCheckBox);
+		
+		JCheckBox chckbxComputer = new JCheckBox("computer");
+		chckbxComputer.setBounds(332, 280, 97, 23);
+		RoomReservation.add(chckbxComputer);
+		
+		JCheckBox chckbxMicrophone = new JCheckBox("microphone ");
+		chckbxMicrophone.setBounds(433, 280, 97, 23);
+		RoomReservation.add(chckbxMicrophone);
+		
+		JCheckBox chckbxSmartBoard = new JCheckBox("smart board");
+		chckbxSmartBoard.setBounds(545, 280, 97, 23);
+		RoomReservation.add(chckbxSmartBoard);
+		
+		JPanel CancelReservation = new JPanel();
+		contentPane.add(CancelReservation, "name_62079003598369");
+		CancelReservation.setLayout(null);
+		
+		table = new JTable();
+		table.setEnabled(false);
+		table.setModel(new DefaultTableModel(
+			new Object[][] {
+				{"ClassRoom Number", "Date", "Time"},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+			},
+			new String[] {
+				"New column", "New column", "New column"
+			}
+		));
+		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		table.setBounds(115, 130, 487, 240);
+		CancelReservation.add(table);
+		
+		JLabel lblViewcancelReservationsPage = new JLabel("View/Cancel Reservations Page");
+		lblViewcancelReservationsPage.setFont(new Font("Tahoma", Font.PLAIN, 22));
+		lblViewcancelReservationsPage.setBounds(141, 24, 374, 51);
+		CancelReservation.add(lblViewcancelReservationsPage);
+		
+		JList list_2 = new JList();
+		list_2.setModel(new AbstractListModel() {
+			String[] values = new String[] {"Reservation ID", "23 ", "65", "32", "34", "94", ".", ".", "."};
+			public int getSize() {
+				return values.length;
+			}
+			public Object getElementAt(int index) {
+				return values[index];
+			}
+		});
+		list_2.setBounds(39, 129, 74, 240);
+		CancelReservation.add(list_2);
+		
+		JButton btnDeleteTheSelected = new JButton("Delete the selected reservation");
+		btnDeleteTheSelected.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		btnDeleteTheSelected.setBounds(171, 381, 304, 42);
+		CancelReservation.add(btnDeleteTheSelected);
+		
+		JPanel PremiumUser = new JPanel();
+		contentPane.add(PremiumUser, "name_62079068338230");
+		PremiumUser.setLayout(null);
+		
+		JLabel lblPremiumUserPage = new JLabel("Premium User Page");
+		lblPremiumUserPage.setFont(new Font("Tahoma", Font.PLAIN, 22));
+		lblPremiumUserPage.setBounds(219, 36, 268, 27);
+		PremiumUser.add(lblPremiumUserPage);
+		
+		JButton btnViewRooms = new JButton("View Rooms");
+		btnViewRooms.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		btnViewRooms.setBounds(193, 140, 249, 39);
+		PremiumUser.add(btnViewRooms);
+		
+		JButton btnReserveARoom = new JButton("Reserve a room");
+		btnReserveARoom.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		btnReserveARoom.setBounds(193, 238, 249, 39);
+		PremiumUser.add(btnReserveARoom);
+		
+		JButton btnVieweditMyReservations = new JButton("View/Edit my reservations");
+		btnVieweditMyReservations.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		btnVieweditMyReservations.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		btnVieweditMyReservations.setBounds(193, 328, 249, 39);
+		PremiumUser.add(btnVieweditMyReservations);
+		
+		JPanel ViewRooms = new JPanel();
+		contentPane.add(ViewRooms, "name_62079124537765");
+		ViewRooms.setLayout(null);
+		
+		JLabel lblViewRoomsPage = new JLabel("View Rooms Page");
+		lblViewRoomsPage.setBounds(212, 36, 218, 45);
+		lblViewRoomsPage.setFont(new Font("Tahoma", Font.PLAIN, 22));
+		ViewRooms.add(lblViewRoomsPage);
+		
+		JLabel lblDate = new JLabel("Date");
+		lblDate.setBounds(54, 153, 153, 39);
+		lblDate.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		ViewRooms.add(lblDate);
+		
+		JLabel lblTime = new JLabel("Time");
+		lblTime.setBounds(54, 267, 153, 39);
+		lblTime.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		ViewRooms.add(lblTime);
+		
+		JComboBox comboBox = new JComboBox();
+		comboBox.setBounds(155, 165, 224, 20);
+		ViewRooms.add(comboBox);
+		
+		JComboBox comboBox_1 = new JComboBox();
+		comboBox_1.setBounds(155, 279, 224, 20);
+		ViewRooms.add(comboBox_1);
+		
+		JList list = new JList();
+		list.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		list.setModel(new AbstractListModel() {
+			String[] values = new String[] {"Room 127", "Room 111", "Room 124", "Room 155", "Room 145", ".", ".", ""};
+			public int getSize() {
+				return values.length;
+			}
+			public Object getElementAt(int index) {
+				return values[index];
+			}
+		});
+		list.setBounds(453, 127, 194, 200);
+		ViewRooms.add(list);
+		
+		JPanel NormalUser = new JPanel();
+		contentPane.add(NormalUser, "name_62079189041126");
+		NormalUser.setLayout(null);
+		
+		JLabel lblYouAreLogged = new JLabel("You are logged in as a NORMAL USER");
+		lblYouAreLogged.setBounds(127, 40, 388, 36);
+		lblYouAreLogged.setFont(new Font("Tahoma", Font.PLAIN, 22));
+		NormalUser.add(lblYouAreLogged);
+		
+		JButton btnViewEmptyRooms = new JButton("View Empty Rooms");
+		btnViewEmptyRooms.setBounds(219, 211, 198, 36);
+		btnViewEmptyRooms.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		NormalUser.add(btnViewEmptyRooms);
+	}
+}

@@ -1,0 +1,223 @@
+package gui;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import java.awt.GridLayout;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import java.awt.Color;
+import java.awt.Font;
+import javax.swing.JPasswordField;
+import javax.swing.JFormattedTextField;
+import javax.swing.SwingConstants;
+import javax.swing.JMenuBar;
+import javax.swing.JComboBox;
+
+public class Start extends JFrame {
+
+	private JPanel contentPane;
+	private JTextField textField;
+	private JPasswordField passwordField;
+	private JTextField textField_1;
+	private JTextField textField_2;
+	private JTextField textField_4;
+	private JTextField textField_5;
+	private JPasswordField passwordField_1;
+	private JTextField textField_3;
+	private JTextField textField_6;
+	private JTextField txtNoteAnEmail;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Start frame = new Start();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public Start() {
+		getContentPane().setLayout(null);
+		
+		JLabel lblUserId = new JLabel("User ID");
+		lblUserId.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblUserId.setBounds(76, 111, 77, 17);
+		getContentPane().add(lblUserId);
+		
+		JLabel lblPassword = new JLabel("Password");
+		lblPassword.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblPassword.setBounds(76, 173, 91, 28);
+		getContentPane().add(lblPassword);
+		
+		textField = new JTextField();
+		textField.setBounds(163, 111, 325, 28);
+		getContentPane().add(textField);
+		textField.setColumns(10);
+		
+		passwordField = new JPasswordField();
+		passwordField.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		passwordField.setBounds(163, 173, 325, 28);
+		getContentPane().add(passwordField);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 726, 504);
+		contentPane = new JPanel();
+		contentPane.setForeground(Color.BLACK);
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		JPanel ResetPassword = new JPanel();
+		ResetPassword.setBounds(0, 0, 700, 454);
+		contentPane.add(ResetPassword);
+		ResetPassword.setLayout(null);
+		
+		JLabel lblResetPasswordPage = new JLabel("Reset Password Page");
+		lblResetPasswordPage.setFont(new Font("Tahoma", Font.PLAIN, 22));
+		lblResetPasswordPage.setBounds(216, 43, 288, 38);
+		ResetPassword.add(lblResetPasswordPage);
+		
+		JLabel lblEmailAddress = new JLabel("Email Address");
+		lblEmailAddress.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblEmailAddress.setBounds(85, 199, 120, 32);
+		ResetPassword.add(lblEmailAddress);
+		
+		JLabel lblUserId_2 = new JLabel("User ID");
+		lblUserId_2.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblUserId_2.setBounds(85, 272, 120, 32);
+		ResetPassword.add(lblUserId_2);
+		
+		textField_3 = new JTextField();
+		textField_3.setBounds(216, 199, 247, 29);
+		ResetPassword.add(textField_3);
+		textField_3.setColumns(10);
+		
+		textField_6 = new JTextField();
+		textField_6.setColumns(10);
+		textField_6.setBounds(216, 272, 247, 29);
+		ResetPassword.add(textField_6);
+		
+		txtNoteAnEmail = new JTextField();
+		txtNoteAnEmail.setEditable(false);
+		txtNoteAnEmail.setText("Note: An email will be sent to the user email address to set the new password");
+		txtNoteAnEmail.setBounds(137, 368, 392, 57);
+		ResetPassword.add(txtNoteAnEmail);
+		txtNoteAnEmail.setColumns(10);
+		
+		JPanel Register = new JPanel();
+		Register.setBounds(0, 0, 700, 454);
+		contentPane.add(Register);
+		Register.setLayout(null);
+		
+		JLabel lblId = new JLabel("ID");
+		lblId.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblId.setBounds(91, 86, 79, 24);
+		Register.add(lblId);
+		
+		JLabel lblEmail = new JLabel("Email");
+		lblEmail.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblEmail.setBounds(91, 218, 79, 24);
+		Register.add(lblEmail);
+		
+		JLabel lblUniversityPosition = new JLabel("University position");
+		lblUniversityPosition.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblUniversityPosition.setBounds(91, 279, 137, 24);
+		Register.add(lblUniversityPosition);
+		
+		JLabel lblPhoneNumber = new JLabel("Phone Number");
+		lblPhoneNumber.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblPhoneNumber.setBounds(91, 347, 137, 24);
+		Register.add(lblPhoneNumber);
+		
+		JLabel lblPassword_2 = new JLabel("Password");
+		lblPassword_2.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblPassword_2.setBounds(91, 155, 79, 24);
+		Register.add(lblPassword_2);
+		
+		textField_2 = new JTextField();
+		textField_2.setBounds(241, 88, 241, 24);
+		Register.add(textField_2);
+		textField_2.setColumns(10);
+		
+		textField_4 = new JTextField();
+		textField_4.setColumns(10);
+		textField_4.setBounds(241, 220, 241, 24);
+		Register.add(textField_4);
+		
+		textField_5 = new JTextField();
+		textField_5.setColumns(10);
+		textField_5.setBounds(241, 349, 241, 24);
+		Register.add(textField_5);
+		
+		passwordField_1 = new JPasswordField();
+		passwordField_1.setBounds(241, 155, 241, 24);
+		Register.add(passwordField_1);
+		
+		JComboBox comboBox = new JComboBox();
+		comboBox.setBounds(238, 283, 241, 20);
+		Register.add(comboBox);
+		
+		JLabel lblRegistrationPage = new JLabel("Registration Page");
+		lblRegistrationPage.setFont(new Font("Tahoma", Font.PLAIN, 22));
+		lblRegistrationPage.setBounds(243, 23, 239, 33);
+		Register.add(lblRegistrationPage);
+		
+		JPanel panel = new JPanel();
+		panel.setBounds(0, 0, 700, 454);
+		contentPane.add(panel);
+		panel.setLayout(null);
+		
+		JLabel lblUserId_1 = new JLabel("User ID");
+		lblUserId_1.setBounds(77, 124, 91, 20);
+		panel.add(lblUserId_1);
+		lblUserId_1.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		
+		JLabel lblPassword_1 = new JLabel("Password");
+		lblPassword_1.setBounds(77, 189, 91, 30);
+		panel.add(lblPassword_1);
+		lblPassword_1.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		
+		textField_1 = new JTextField();
+		textField_1.setBounds(205, 121, 260, 30);
+		panel.add(textField_1);
+		textField_1.setColumns(10);
+		
+		JFormattedTextField formattedTextField = new JFormattedTextField();
+		formattedTextField.setBounds(204, 193, 261, 27);
+		panel.add(formattedTextField);
+		formattedTextField.setHorizontalAlignment(SwingConstants.TRAILING);
+		
+		JButton btnRegister = new JButton("Register");
+		btnRegister.setBounds(205, 278, 150, 38);
+		panel.add(btnRegister);
+		btnRegister.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		
+		JButton btnResetPassword = new JButton("Reset Password");
+		btnResetPassword.setBounds(205, 355, 150, 38);
+		panel.add(btnResetPassword);
+		btnResetPassword.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		
+		JLabel lblWelcomeToBookit = new JLabel("Welcome to BookIt");
+		lblWelcomeToBookit.setFont(new Font("Tahoma", Font.PLAIN, 22));
+		lblWelcomeToBookit.setBounds(206, 35, 259, 38);
+		panel.add(lblWelcomeToBookit);
+		
+		JButton btnNewButton = new JButton("New button");
+		btnNewButton.setBounds(137, 106, 89, 23);
+		
+	}
+}
